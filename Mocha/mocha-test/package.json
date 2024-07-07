@@ -1,0 +1,17 @@
+{
+  "name": "mocha-test-app",
+  "version": "1.0.0",
+  "description": "basic mocha testing app",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha",
+    "start": ""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "chai": "^5.1.1",
+    "mocha": "^10.6.0"
+  }
+}

@@ -1,0 +1,24 @@
+{
+  "name": "global-fixture",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "mocha --file test/global-fixture.js"
+    
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "mocha": "^10.6.0"
+  },
+  "dependencies": {
+    "mongoose": "^8.4.5"
+  }
+}
+
+
