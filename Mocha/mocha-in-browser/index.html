@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href = "https://unpkg.com/mocha/mocha.css">
+    <script src="https://unpkg.com/mocha/mocha.js"></script>
+
+    <script>
+        mocha.setup('bdd'); //setup mocha to use BDD style syntax
+    </script>
+
+    <script type="module">
+        import {assert} from 'https://unpkg.com/chai/chai.js';
+        window.assert = assert; //expose assert globally for use in tests
+    </script>
+
+    <!--Include your test files -->
+    <script src="test/test-suite.test.mjs" type="module"></script>
+</head>
+<body>
+    <div id="mocha"></div> <!-- This will display test results-->
+    <script type="module">
+        mocha.run();
+    </script>
+    
+</body>
+</html>

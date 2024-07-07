@@ -1,5 +1,5 @@
 {
-  "name": "global-fixture",
+  "name": "mocha-assertions",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -7,18 +7,13 @@
     "test": "test"
   },
   "scripts": {
-    "test": "mocha --file test/root-hook.mjs"
-    
+    "test": "mocha"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "chai": "^5.1.1",
     "mocha": "^10.6.0"
-  },
-  "dependencies": {
-    "mongoose": "^8.4.5"
   }
 }
-
-
