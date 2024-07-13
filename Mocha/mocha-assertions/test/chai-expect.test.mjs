@@ -1,5 +1,6 @@
 import {expect, should} from 'chai';
 should(); //enable should syntax
+//const {expect} = require('chai');
 
 const obj1 = {foo:'bar', baz:{nested:'object'}};
 const obj2 = {foo:'bar', baz:{nested:'object'}};
