@@ -1,0 +1,29 @@
+It will create a new Docker container with the specified docker image
+docker create --name<container name> <image name>
+
+to start a stopped or new container, we use
+docker start <container name>
+
+Docker run command will do the work of both "docker create" and "docker start"
+docker run --name <container name> <image name>
+
+If we want to pause the processes running inside the container, we use:
+docker pause <container name>
+
+To unpause the container:
+docker unpause ,conatiner name>
+
+Stop container - to all the processes running in that container. Stopping does not mean killing or ending the processes
+docker stop <container name>
+
+If a container is stopped, all its allocated resources are released
+If a container is paused, all its allocated resources(memory, cpu) are not released.
+
+To kill a conatiner:
+docker kill <container name> - Immediate termination
+
+To delete a container:
+docker rm <container name>
+To delete a container, we have to first stop the container
+
+docker run --name mongodb-container mongo
