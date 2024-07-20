@@ -9,7 +9,7 @@ pipeline {
     stages {
         stage('check node version'){
             steps{
-                bat 'node-v'
+                bat 'node -v'
                 bat 'npm -v'
             }
         }
