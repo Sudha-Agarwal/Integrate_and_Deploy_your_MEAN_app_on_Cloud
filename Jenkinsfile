@@ -28,13 +28,18 @@ pipeline {
         }
         stage('Test') {
             steps {
-                bat 'npm test'
+                dir('Mocha/restapi-testing') {
+                    bat 'npm test'
+                }                
             }
         }
 
         stage('Package') {
             steps {
-                bat 'zip -r ../backend.zip .'
+                dir('Mocha/restapi-testing'){
+                    bat 'zip -r ../backend.zip .'
+                }
+                
             }
         }
     }
