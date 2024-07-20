@@ -1,8 +1,6 @@
 //const mongoose = require('mongoose');
 import mongoose from 'mongoose';
 
-
-
 export async function mochaGlobalSetup(){
     console.log("Global Setup: connecting to database");
 
