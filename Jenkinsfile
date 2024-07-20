@@ -5,7 +5,7 @@ pipeline {
         // Ensure MongoDB connection URI matches your local setup
         MONGO_URL = 'mongodb://127.0.0.1:27017/testDB'
     }
-    
+
 
  tools {nodejs "nodeJS16"}
     stages {
@@ -39,20 +39,6 @@ pipeline {
                 }                
             }
         }
-
-        stage('Package') {
-            steps {
-                dir('Mocha/restapi-testing'){
-                    bat 'zip -r ../backend.zip .'
-                }
-                
-            }
-        }
     }
-
-    post {
-        always {
-            archiveArtifacts artifacts: 'backend.zip, frontend.zip', allowEmptyArchive: true
-        }
-    }
+    
 }
