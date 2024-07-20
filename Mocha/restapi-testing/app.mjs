@@ -34,8 +34,17 @@ app.post('/api/items', async(req,res)=>{
         res.status(500).json({message: 'Error creating item'})
     }
 })
-
-
+app.get('/api/items/get', async(req,res)=>{
+    try{
+        //const item = new Item(req.body);
+        //await item.save();
+        res.status(201).json({message: 'success'})
+        //res.status(201).json({id:item._id, name:item.name});
+    }
+    catch(err){
+        res.status(500).json({message: 'Error creating item'})
+    }
+})
 
 app.listen(port,()=>{
     console.log('server running');
