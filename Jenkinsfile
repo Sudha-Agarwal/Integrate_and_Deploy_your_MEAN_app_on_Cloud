@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'NodeJS 14' // Adjust the name as per your NodeJS installation
+        NODEJS_HOME = tool name: 'NodeJS 16' // Adjust the name as per your NodeJS installation
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
     }
 
