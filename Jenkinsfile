@@ -11,6 +11,13 @@ pipeline {
     }
 
     stages {
+        stage('check node version'){
+            steps{
+                sh 'node -v'
+                sh 'npm -v'
+            }
+
+        }
         stage('Checkout') {
             steps {
                 git 'https://github.com/Sudha-Agarwal/Integrate_and_Deploy_your_MEAN_app_on_Cloud.git'
