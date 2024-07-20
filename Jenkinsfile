@@ -5,8 +5,8 @@ pipeline {
     stages {
         stage('check node version'){
             steps{
-                sh 'node -v'
-                sh 'npm -v'
+                bat 'node -v'
+                bat 'npm -v'
             }
 
         }
@@ -21,31 +21,31 @@ pipeline {
                 dir('Mocha/rest-api-testing') {
                     sh 'npm install'
                 }
-                sh 'npm install -g @angular/cli'
+                bat 'npm install -g @angular/cli'
             }
         }
 
         stage('Build') {
             steps {
                 dir('frontend') {
-                    sh 'ng build --configuration=production'
+                    bat 'ng build --configuration=production'
                 }
             }
         }
 
         stage('Test') {
             steps {
-                sh 'npm test'
+                bat 'npm test'
             }
         }
 
         stage('Package') {
             steps {
                 dir('backend') {
-                    sh 'zip -r ../backend.zip .'
+                    bat 'zip -r ../backend.zip .'
                 }
                 dir('frontend/dist') {
-                    sh 'zip -r ../../../frontend.zip .'
+                    bat 'zip -r ../../../frontend.zip .'
                 }
             }
         }
