@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         // Ensure MongoDB connection URI matches your local setup
-        MONGO_URL = 'mongodb://127.0.0.1:27017/yourDatabaseName'
+        MONGO_URL = 'mongodb://127.0.0.1:27017/testDB'
     }
 
  tools {nodejs "nodeJS16"}
