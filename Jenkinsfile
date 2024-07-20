@@ -2,8 +2,12 @@ pipeline {
     agent any
 
     environment {
-        NODEJS_HOME = tool name: 'NodeJS 16'
+        NODEJS_HOME = tool name: 'NodeJS16'
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
+    }
+
+    tools {
+        nodejs "NodeJS16"
     }
 
     stages {
