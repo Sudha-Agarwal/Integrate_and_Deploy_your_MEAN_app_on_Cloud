@@ -45,7 +45,7 @@ app.get('/api/items/get', async(req,res)=>{
     }
 })
 
-app1.listen(port,()=>{
+app.listen(port,()=>{
     console.log('server running');
 })
 
