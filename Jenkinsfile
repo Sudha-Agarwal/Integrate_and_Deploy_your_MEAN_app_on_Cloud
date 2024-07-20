@@ -6,10 +6,6 @@ pipeline {
         PATH = "${NODEJS_HOME}/bin:${env.PATH}"
     }
 
-    tools {
-        nodejs "NodeJS 16"
-    }
-
     stages {
         stage('Checkout') {
             steps {
@@ -29,7 +25,7 @@ pipeline {
         stage('Build') {
             steps {
                 dir('frontend') {
-                    sh 'ng build --prod'
+                    sh 'ng build --configuration=production'
                 }
             }
         }
