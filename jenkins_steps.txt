@@ -1,0 +1,174 @@
+echo "hello"
+cd
+touch hello.txt
+
+H/5 * * * *
+
+To configure Jenkins for a simple Node.js and Express application with REST APIs and Mocha test cases so that changes pushed to GitHub trigger a build and run the test cases, follow these steps:
+
+Prerequisites
+1. Jenkins installed and running .
+2. GitHub repository  with your Node.js and Express application.
+3. Jenkins plugins : Git Plugin, NodeJS Plugin, and GitHub 
+
+ Step-by-Step Guide
+Step 1: Install Necessary Jenkins Plugins
+1.  Go to Jenkins Dashboard > Manage Jenkins > Manage Plugins .
+2.  Install the following plugins :
+   - Git Plugin
+   - NodeJS Plugin
+   - GitHub Integration Plugin
+
+   Step 2: Configure Jenkins NodeJS Environment
+1.  Go to Jenkins Dashboard > Manage Jenkins > Global Tool Configuration .
+2.  Scroll down to NodeJS .
+3.  Add NodeJS  with the desired name and version.
+   - Ensure you select "Install automatically" and choose the appropriate Node.js version for your project.
+
+   Step 3: Create a New Freestyle Job
+1.  Go to Jenkins Dashboard > New Item .
+2.  Enter a name for the job , select "Freestyle project", and click "OK".
+
+   Step 4: Configure the Freestyle Job
+1.  In the job configuration page :
+    General Section :
+   -  Add a description  for the job (optional).
+
+    Source Code Management Section :
+   -  Select Git .
+   -  Provide the Repository URL  of your GitHub repository.
+   -  Add your repository credentials  if required.
+   -  Specify the branch  you want to build (e.g., `main`).
+
+    Build Triggers Section :
+   -  Check "GitHub hook trigger for GITScm polling"  to trigger the build when changes are pushed to GitHub.
+
+    Build Environment Section :
+   -  Select "Provide Node & npm bin/ folder to PATH" .
+   -  Choose the NodeJS version  you configured earlier.
+
+    Build Section :
+   -  Add a Build Step : "Execute shell".
+   -  Enter the following script  to install dependencies and run tests:
+     npm install
+     npm test
+2.  Save the Job .
+
+   Step 5: Configure GitHub Webhook
+
+1.  Go to your GitHub repository > Settings > Webhooks .
+2.  Add a webhook :
+   -  Payload URL : `http://your-jenkins-server/github-webhook/`
+   -  Content type : `application/json`
+   -  Secret : (optional, but recommended for security)
+   -  Events : Choose "Just the push event."
+
+   Step 6: Test Your Configuration
+
+1.  Make a change in your GitHub repository  and push it.
+2.  Check Jenkins  to see if the build is triggered automatically.
+3.  Monitor the build  to ensure it completes successfully and verify that tests are run.
+ 
+With pipeline
+To set up Continuous Integration (CI) for a simple MEAN (MongoDB, Express.js, Angular, Node.js) project using Jenkins, follow these steps:
+
+Prerequisites
+1. Jenkins installed and running.
+2. Jenkins plugins: Git Plugin, NodeJS Plugin, and any other necessary plugins for your project.
+3. A GitHub repository containing your MEAN project.
+
+Step-by-Step Guide
+
+   Step 1: Install Necessary Plugins
+1.   Go to Jenkins Dashboard > Manage Jenkins > Manage Plugins  .
+2.   Install the following plugins   (if not already installed):
+   - Git Plugin
+   - NodeJS Plugin
+   - Pipeline Plugin
+   - GitHub Plugin (optional for better GitHub integration)
+
+   Step 2: Configure Jenkins NodeJS Environment
+1.   Go to Jenkins Dashboard > Manage Jenkins > Global Tool Configuration  .
+2.   Scroll down to NodeJS  .
+3.   Add NodeJS   with the desired name and version.
+   - Ensure you select "Install automatically" and choose the appropriate Node.js version for your project.
+
+   Step 3: Create a New Pipeline Job
+1.   Go to Jenkins Dashboard > New Item  .
+2.   Enter a name for the job  , select "Pipeline", and click "OK".
+
+   Step 4: Configure the Pipeline Job
+1.   In the job configuration page, go to the Pipeline section  .
+2.   Select Pipeline script from SCM  .
+3.   Choose Git   and provide the repository URL.
+4.   Add your repository credentials if required  .
+5.   Specify the branch   you want to build (e.g., `main`).
+6.   Set the Script Path   to your `Jenkinsfile` (you'll create this file in the root of your repository).
+
+   Step 5: Create the Jenkinsfile in Your Repository
+Create a `Jenkinsfile` in the root of your repository with the following content:
+
+pipeline {
+    agent any
+
+    environment {
+        // Ensure MongoDB connection URI matches your local setup
+        MONGO_URL = 'mongodb://127.0.0.1:27017/testDB'
+    }
+
+ tools {nodejs "nodeJS16"}
+    stages {
+        stage('check node version'){
+            steps{
+                bat 'node -v'
+                bat 'npm -v'
+            }
+
+        }
+        stage('Checkout') {
+            steps {
+                checkout([$class: 'GitSCM',
+                    branches: [[name: '*/main']],
+                    userRemoteConfigs: [[url: 'https://github.com/Sudha-Agarwal/Integrate_and_Deploy_your_MEAN_app_on_Cloud.git']]
+                ])
+            }
+        }
+
+        stage('Install Dependencies') {
+            steps {
+                dir('Mocha/restapi-testing') {
+                    bat 'npm install'
+                }                
+            }
+        }
+        stage('Test') {
+            steps {
+                dir('Mocha/restapi-testing') {
+                    bat 'npm test'
+                }                
+            }
+        }
+    }
+    
+}
+
+  Explanation  :
+-   Checkout stage  : Clones the repository.
+-   Install Dependencies stage  : Installs Node.js dependencies and Angular CLI globally.
+-   Build stage  : Builds the Angular application.
+-   Test stage  : Runs your tests.
+
+   Step 6: Configure GitHub Webhooks
+1.   Go to your GitHub repository > Settings > Webhooks  .
+2.   Add a webhook  :
+   -   Payload URL  : `http://your-jenkins-server/github-webhook/`
+   -   Content type  : `application/json`
+   -   Secret  : (optional, but recommended for security)
+   -   Events  : Choose "Just the push event."
+
+   Step 7: Test Your Configuration
+1.   Make a change in your GitHub repository   and push it.
+2.   Check Jenkins   to see if the build is triggered automatically.
+3.   Monitor the build   to ensure it completes successfully and verify that tests are run and artifacts are archived.
+
+
