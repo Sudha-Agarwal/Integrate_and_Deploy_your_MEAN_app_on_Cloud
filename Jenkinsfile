@@ -1,15 +1,16 @@
 pipeline {
     agent any
 
- tools {nodejs "nodeJS16"}
+    tools { nodejs "nodeJS16" }
+
     stages {
-        stage('check node version'){
-            steps{
+        stage('Check Node Version') {
+            steps {
                 bat 'node -v'
                 bat 'npm -v'
             }
-
         }
+
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
@@ -21,18 +22,7 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                dir('Mocha/restapi-testing') {
-                    bat 'npm install'
-                }
-                bat 'npm install -g @angular/cli'
-            }
-        }
-
-        stage('Build') {
-            steps {
-                dir('frontend') {
-                    bat 'ng build --configuration=production'
-                }
+                bat 'npm install'
             }
         }
 
@@ -44,19 +34,14 @@ pipeline {
 
         stage('Package') {
             steps {
-                dir('backend') {
-                    bat 'zip -r ../backend.zip .'
-                }
-                dir('frontend/dist') {
-                    bat 'zip -r ../../../frontend.zip .'
-                }
+                bat 'zip -r app.zip .'
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'backend.zip, frontend.zip', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'app.zip', allowEmptyArchive: true
         }
     }
 }
