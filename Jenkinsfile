@@ -1,16 +1,15 @@
 pipeline {
     agent any
 
-    tools { nodejs "nodeJS16" }
-
+ tools {nodejs "nodeJS16"}
     stages {
-        stage('Check Node Version') {
-            steps {
+        stage('check node version'){
+            steps{
                 bat 'node -v'
                 bat 'npm -v'
             }
-        }
 
+        }
         stage('Checkout') {
             steps {
                 checkout([$class: 'GitSCM',
@@ -22,10 +21,11 @@ pipeline {
 
         stage('Install Dependencies') {
             steps {
-                bat 'npm install'
+                dir('Mocha/restapi-testing') {
+                    bat 'npm install'
+                }                
             }
         }
-
         stage('Test') {
             steps {
                 bat 'npm test'
@@ -34,14 +34,14 @@ pipeline {
 
         stage('Package') {
             steps {
-                bat 'zip -r app.zip .'
+                bat 'zip -r ../backend.zip .'
             }
         }
     }
 
     post {
         always {
-            archiveArtifacts artifacts: 'app.zip', allowEmptyArchive: true
+            archiveArtifacts artifacts: 'backend.zip, frontend.zip', allowEmptyArchive: true
         }
     }
 }
