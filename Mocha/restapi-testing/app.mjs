@@ -2,7 +2,6 @@ import express from 'express';
 import mongoose from 'mongoose';
 const app = express();
 const port = 3000;
-
 //MongoDB model
 const itemSchema = new mongoose.Schema({
     name:String
