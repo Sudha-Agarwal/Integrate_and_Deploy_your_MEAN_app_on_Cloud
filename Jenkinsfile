@@ -22,7 +22,7 @@ pipeline {
         stage('Install Dependencies') {
             steps {
                 dir('Mocha/rest-api-testing') {
-                    sh 'npm install'
+                    bat 'npm install'
                 }
                 bat 'npm install -g @angular/cli'
             }
