@@ -1,5 +1,5 @@
 module.exports = {
-    reporter: 'mocha-awesome',
+    reporter: 'mochaawesome',
   reporterOptions: {
     reportDir: './mochawesome-report', // Directory where the report will be generated
     reportFilename: 'results', // Name of the report file
