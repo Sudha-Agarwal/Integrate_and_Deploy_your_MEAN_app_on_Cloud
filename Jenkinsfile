@@ -52,7 +52,9 @@ pipeline {
         stage('Archive Artifacts'){
             steps{
                 dir('Mocha/restapi-testing'){
-                    archiveArtifacts artifacts : 'mochawesome-report/**/*',allowEmptyArchive: true
+                    archiveArtifacts artifacts: 'test-results.xml, coverage/**', allowEmptyArchive:true
+
+                    //archiveArtifacts artifacts : 'mochawesome-report/**/*',allowEmptyArchive: true
                 }
             }
         }
@@ -60,14 +62,15 @@ pipeline {
 
     post{
         always{
-            emailext(
+            junit 'test-results.xml'
+            /*emailext(
                 to: 'sudha.agarwal84@gmail.com',
                 subject: "Build ${env.BUILD_NUMBER} - ${currentBuild.currentResult}",
                 body: """<p>Build ${env.BUILD_NUMBER} - ${currentBuild.currentResult}</p>
                 <p><a href="${env.BUILD_URL}artifact/mochawesone-report/index.html">View Test Report</a></p>""",
-                attachLog: true,
-                attachmentsPattern: 'mochawesome-report/**/*'
-            )
+                attachLog: true,*/
+                //attachmentsPattern: 'mochawesome-report/**/*'
+            //)
         }
     }      
        
