@@ -44,8 +44,9 @@ pipeline {
         
         stage('Archive Artifacts') {
             steps {
-                dir('Mocha/restapi-testing') {
-                    archiveArtifacts artifacts: 'test-results.xml, coverage/**', allowEmptyArchive: true
+                dir('Mocha/restapi-testing') {                    
+                    archiveArtifacts artifacts: 'mochawesome-report/**/*', allowEmptyArchive: true
+                    }
                 }
             }
         }
@@ -53,7 +54,7 @@ pipeline {
 
     post {
         always {
-            junit '**/test-results.xml'
+            //junit '**/test-results.xml'
         }
     }
 }
