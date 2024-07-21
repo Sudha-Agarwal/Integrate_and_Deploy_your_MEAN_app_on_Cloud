@@ -34,12 +34,10 @@ pipeline {
             }
         }
         
-        stage("Parallel Execution"){
-            parallel{
-                stage('Install Dependencies') {
-                    steps {
-                        dir('Mocha/restapi-testing') {
-                        bat 'npm install'
+        stage('Install Dependencies') {
+            steps {
+                dir('Mocha/restapi-testing') {
+                    bat 'npm install'
                 }
             }
         }
@@ -51,9 +49,6 @@ pipeline {
                 }
             }
         }
-    }
-}
-        
         stage('Archive Artifacts'){
             steps{
                 dir('Mocha/restapi-testing'){
