@@ -26,36 +26,37 @@ pipeline {
             }
         }
         
-        stage('Install Dependencies') {
-            steps {
-                dir('Mocha/restapi-testing') {
-                    bat 'npm install'
+        stage('Parallel Execution') {
+            parallel {
+                stage('Install Dependencies') {
+                    steps {
+                        dir('Mocha/restapi-testing') {
+                            bat 'npm install'
+                        }
+                    }
                 }
-            }
-        }
 
-        stage('Run Tests') {
-            steps {
-                dir('Mocha/restapi-testing') {
-                    bat 'npm test'
+                stage('Run Tests') {
+                    steps {
+                        dir('Mocha/restapi-testing') {
+                            bat 'npm test'
+                        }
+                    }
                 }
             }
         }
         
         stage('Archive Artifacts') {
             steps {
-                dir('Mocha/restapi-testing') {    
-                    //archiveArtifacts artifacts: 'test-results.xml, coverage/**', allowEmptyArchive: true                
+                dir('Mocha/restapi-testing') {
                     archiveArtifacts artifacts: 'mochawesome-report/**/*', allowEmptyArchive: true
-                    }
                 }
             }
         }
+    }
     
-
     post {
         always {
-            //junit '**/test-results.xml'
             // Send email with build status
             emailext (
                 to: 'sudhmangla@gmail.com', // Change this to your Gmail address
