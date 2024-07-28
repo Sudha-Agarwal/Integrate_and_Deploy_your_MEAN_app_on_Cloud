@@ -1,0 +1,106 @@
+pipeline {
+    agent {
+        node {
+            label 'my-agent-label'
+            customWorkspace '/my/custom/workspace'
+        }
+    }
+
+    options{
+        //Number of builds to keep in jenkins
+        buildDiscarder(logRotator(numToKeepStr:'10'))
+
+        //Timeout for the build
+        timeout(time:1, unit:'HOURS')
+
+        //Set the pipelien to run only if previous build was successful
+        skipDefaultCheckout(true)
+    }
+    triggers{
+        //Schedule the job to run every day at midnight
+        cron('H 0 * * *')
+
+        //Poll SCM every 15 minutes
+        cron('H/15 * * * *')
+    }
+    environment{
+        ENV_VAR = "my value"
+    }
+
+    parameters {
+        //define parameters for the pipeline
+        string(name: 'PARAM1', defaultValue: 'default-value', description: 'A parameter for the pipeline')
+        booleanParam(name: 'ENABLE_FEATURE', defaultValue:false, description:'Enable a specific feature')
+    }
+
+    stages{
+        stage('Setup'){
+            when{
+                //Run this stage only if the parameter ENABLE_FEATURE is true
+                expression { params.ENABLE_FEATURE}
+            }
+            steps{
+                echo 'starting up...'
+                script {
+                    //Custom function call
+                    setupEnvironment()
+                }
+            }
+        }
+        stage('Checkout') {
+            steps {
+                echo 'Checking out code...'
+                checkout scm
+            }
+        }
+        stage('Build') {
+            steps {
+                echo 'Building the project...'
+                script {
+                    // Build commands
+                    bat 'echo Building the project...'
+                }
+            }
+        }
+        stage('Deploy'){
+            when{
+                //Run this stage only if the build is successful
+                expression {currentBuild.result == 'SUCCESS'}
+                steps{
+
+                }
+            }
+        }
+    }
+    post{
+        success {
+            bat 'echo Pipeline succeeded'
+            script{
+                notify('success')                
+
+            }
+        }
+        failure {
+            bat 'echo Pipeline failed'
+            script{
+                notify('failure')
+            }
+
+        }
+    }
+}
+
+//Custom function to set up Environment
+def setupEnvironment(){
+    //setup environment commands
+}
+
+def notify(status){
+    if(status == 'success'){
+        //some code
+
+    }
+    else if(status=='failure'){
+        //some code
+    }
+}

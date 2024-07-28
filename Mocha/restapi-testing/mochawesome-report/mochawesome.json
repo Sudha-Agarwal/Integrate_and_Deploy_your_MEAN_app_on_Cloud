@@ -5,9 +5,9 @@
     "passes": 2,
     "pending": 0,
     "failures": 0,
-    "start": "2024-07-07T15:33:37.683Z",
-    "end": "2024-07-07T15:33:37.964Z",
-    "duration": 281,
+    "start": "2024-07-20T13:46:11.436Z",
+    "end": "2024-07-20T13:46:11.787Z",
+    "duration": 351,
     "testsRegistered": 2,
     "passPercent": 100,
     "pendingPercent": 0,
@@ -18,7 +18,7 @@
   },
   "results": [
     {
-      "uuid": "4a48ad4a-7aeb-42df-91ff-1b097b39d9e2",
+      "uuid": "6a74dd3a-f26e-4e54-87e0-f9edf5414f08",
       "title": "",
       "fullFile": "G:\\Sudha\\Simplilearn\\code\\Integrate and Deploy your MEAN app on Cloud\\Mocha\\restapi-testing\\test\\api.test.mjs",
       "file": "\\test\\api.test.mjs",
@@ -27,7 +27,7 @@
       "tests": [],
       "suites": [
         {
-          "uuid": "3850cde5-88a7-4986-8a28-d50a01da6d75",
+          "uuid": "7e491e52-913f-4666-811a-46f0c47792c4",
           "title": "API Tests",
           "fullFile": "G:\\Sudha\\Simplilearn\\code\\Integrate and Deploy your MEAN app on Cloud\\Mocha\\restapi-testing\\test\\api.test.mjs",
           "file": "\\test\\api.test.mjs",
@@ -36,7 +36,7 @@
           "tests": [],
           "suites": [
             {
-              "uuid": "1affc9da-0643-4fd7-9f85-f178f220e97b",
+              "uuid": "56ea1d6f-decb-47d2-b0d4-0c740cb68411",
               "title": "GET /api/items",
               "fullFile": "G:\\Sudha\\Simplilearn\\code\\Integrate and Deploy your MEAN app on Cloud\\Mocha\\restapi-testing\\test\\api.test.mjs",
               "file": "\\test\\api.test.mjs",
@@ -47,7 +47,7 @@
                   "title": "should return a list of items",
                   "fullTitle": "API Tests GET /api/items should return a list of items",
                   "timedOut": false,
-                  "duration": 112,
+                  "duration": 188,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -56,26 +56,26 @@
                   "context": null,
                   "code": "request(app)\n.get('/api/items')\n.expect(200)\n.end((err,res)=>{\n    if(err) done(err);\n    expect(res.body).to.be.an('array').that.is.not.empty;\n    //expect(res.body).to.have.property('name','Item1');\n    //assert.strictEqual(res.body.name, 'Item1');\n    const item = res.body.find(item=> item.name === \"Item1\");\n    assert.isDefined(item,'item exist');\n    assert.strictEqual(item.name,'Item1');\n    //assert.isArray(res.body,'is response an array')\n    done();\n    //assert.isNotNull(val);\n    //expect(val).to.not.be.null;\n})",
                   "err": {},
-                  "uuid": "c44fd389-76b2-4b04-967b-b63dfdcef76e",
-                  "parentUUID": "1affc9da-0643-4fd7-9f85-f178f220e97b",
+                  "uuid": "6d060cdc-b691-4ddd-8058-57a65c952acb",
+                  "parentUUID": "56ea1d6f-decb-47d2-b0d4-0c740cb68411",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "c44fd389-76b2-4b04-967b-b63dfdcef76e"
+                "6d060cdc-b691-4ddd-8058-57a65c952acb"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 112,
+              "duration": 188,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000
             },
             {
-              "uuid": "69d3de28-e33c-445f-a4b2-50e7b44de5a4",
+              "uuid": "22d863bc-2400-4b41-bf78-9b0abfa88b89",
               "title": "POST /api/items",
               "fullFile": "G:\\Sudha\\Simplilearn\\code\\Integrate and Deploy your MEAN app on Cloud\\Mocha\\restapi-testing\\test\\api.test.mjs",
               "file": "\\test\\api.test.mjs",
@@ -86,7 +86,7 @@
                   "title": "should create a new Items",
                   "fullTitle": "API Tests POST /api/items should create a new Items",
                   "timedOut": false,
-                  "duration": 131,
+                  "duration": 108,
                   "state": "passed",
                   "speed": "slow",
                   "pass": true,
@@ -95,20 +95,20 @@
                   "context": null,
                   "code": "const newItem = {name:'Item2'};\nrequest(app)\n.post('/api/items')\n.send(newItem)\n.end((err,res)=>{\n    if(err) return done(err);\n    expect(res.body).to.have.property('id');\n    expect(res.body).to.have.property('name');\n    done();\n})",
                   "err": {},
-                  "uuid": "6f2b9093-eb90-42eb-b75d-f6d4ec9aa690",
-                  "parentUUID": "69d3de28-e33c-445f-a4b2-50e7b44de5a4",
+                  "uuid": "0899db71-2895-42bd-8466-7a2900ba5200",
+                  "parentUUID": "22d863bc-2400-4b41-bf78-9b0abfa88b89",
                   "isHook": false,
                   "skipped": false
                 }
               ],
               "suites": [],
               "passes": [
-                "6f2b9093-eb90-42eb-b75d-f6d4ec9aa690"
+                "0899db71-2895-42bd-8466-7a2900ba5200"
               ],
               "failures": [],
               "pending": [],
               "skipped": [],
-              "duration": 131,
+              "duration": 108,
               "root": false,
               "rootEmpty": false,
               "_timeout": 2000

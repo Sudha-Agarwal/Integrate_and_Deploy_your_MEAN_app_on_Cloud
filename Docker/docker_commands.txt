@@ -27,3 +27,12 @@ docker rm <container name>
 To delete a container, we have to first stop the container
 
 docker run --name mongodb-container mongo
+
+To build local image
+docker build -t <image-name> .
+
+to run this image
+docker run -d --name <container-name> -p 3000:3000 <image-name>
+
+with docker compose
+docker-compose up --build - this command will build the image and then run it inside the container

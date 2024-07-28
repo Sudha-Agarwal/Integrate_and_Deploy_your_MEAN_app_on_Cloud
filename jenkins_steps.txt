@@ -172,3 +172,40 @@ pipeline {
 3.   Monitor the build   to ensure it completes successfully and verify that tests are run and artifacts are archived.
 
 
+ Triggering a Jenkins build remotely.
+ Step 1: Configure the Jenkins Job
+    1.	Open Jenkins and navigate to your job my-job.
+    2.	Click on "Configure" to edit the job settings.
+    3.	Scroll down to the "Build Triggers" section.
+    4.	Check the box labeled "Trigger builds remotely (e.g., from scripts)".
+    5.	Enter a unique "Authentication Token", for example, mySecretToken.
+    6.	Save the job configuration by clicking "Save" or "Apply".
+Step 2: Trigger the Build Remotely
+    - Using Curl:
+    Open your terminal or command prompt and use the following curl command to trigger the build:
+        curl -X POST http://localhost:8080/job/my-job/build?token=mySecretToken
+    - Using a Web Browser:
+        Open your web browser and enter the following URL in the address bar, then hit Enter:
+        http://localhost:8080/job/my-job/build?token=mySecretToken
+
+Parallel build
+Parallel builds in Jenkins Blue Ocean enable you to run multiple stages or jobs concurrently, which can significantly speed up the overall build process. 
+
+To run the stages in parallel within your Jenkins pipeline, you need to utilize the parallel directive. This allows you to execute multiple stages or jobs concurrently, which can speed up the overall build process.
+
+
+Agents:
+In Jenkins, an agent is a fundamental concept that refers to the machine or environment where Jenkins executes build jobs and pipeline steps. Agents are responsible for running the tasks defined in your Jenkins pipeline, and they can be configured in several ways to suit different use cases.
+
+Types of Agents
+Master Node (Controller):
+
+The Jenkins master node (or controller) is the central server where Jenkins is installed and runs.
+It handles tasks like scheduling build jobs, dispatching builds to agents, and providing the web interface.
+By default, the master node can also run builds, but this is often discouraged in production environments to avoid performance issues.
+Agent Nodes (Slaves or Build Agents):
+
+These are separate machines or virtual environments that connect to the Jenkins master to execute build jobs.
+Agents can be physical machines, virtual machines, or containers.
+They allow Jenkins to distribute workloads and run builds in parallel, improving efficiency and scalability.
+

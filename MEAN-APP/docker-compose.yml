@@ -2,13 +2,13 @@ version: '3.8'
 
 services:
   backend:
-  build: ./backend
-  ports:
-    - "3000:3000"
-  depends_on:
-    - database
-  environment:
-    - MONGO_URI=mongodb://database:27017/myDB
+    build: ./backend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - database
+    environment:
+      - MONGO_URI=mongodb://database:27017/myDB
 
   frontend:
     build: ./frontend
